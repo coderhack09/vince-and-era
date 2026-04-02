@@ -185,7 +185,7 @@ Hindi panandalian.
         theme="light"
         layout="image-left"
         isLast={true}
-        imageSrc="/frontboxes/box-2.jpg"
+        imageSrc="/frontboxes/ssss.jpg"
         title="A Lifetime Choice"
         text={
           <>
