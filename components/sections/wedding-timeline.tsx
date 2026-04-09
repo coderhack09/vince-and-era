@@ -22,7 +22,7 @@ const cinzel = Cinzel({
 const ceremonyTime = siteConfig.ceremony.time
 const guestsTime = siteConfig.ceremony.guestsTime ?? "1:30 PM"
 const ceremonyVenue = siteConfig.ceremony.venue
-const receptionVenue = siteConfig.reception.venue
+const receptionVenue = siteConfig.ceremony.location
 
 // Colors sourced from globals.css @theme inline — edit there to update everywhere
 // This section sits on a darker background, so render timeline text/icons in white.
