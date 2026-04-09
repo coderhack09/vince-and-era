@@ -282,7 +282,7 @@ export function SnapShare() {
                     whileHover={{ scale: 1.02 }}
                     transition={{ duration: 0.25 }}
                   >
-                    <CloudinaryImage src="/desktop-background/couple (5).jpg" alt="Wedding moment 3" fill className="object-cover" />
+                    <CloudinaryImage src="/gallery/couple (17).jpg" alt="Wedding moment 3" fill className="object-cover" />
                   </motion.div>
                 </div>
                 <p
