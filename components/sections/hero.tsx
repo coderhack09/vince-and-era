@@ -4,23 +4,23 @@ import { useEffect, useState, useMemo } from "react"
 import { motion } from "motion/react"
 import { Cormorant_Garamond, Cinzel } from "next/font/google"
 import { siteConfig } from "@/content/site"
-import { getCloudinaryUrl } from "@/lib/cloudinary"
+import Image from "next/image"
 
-const desktopImages: string[] = [
+const desktopImages = [
   '/gallery/couple (1).jpg',
   '/gallery/couple (2).jpg',
   '/gallery/couple (3).jpg',
   '/gallery/couple (4).jpg',
   '/gallery/couple (5).jpg',
-].map((src) => getCloudinaryUrl(src, { width: 1920, quality: "auto" }))
+]
 
-const mobileImages: string[] = [
+const mobileImages = [
   '/mobile-background/couple (1).jpg',
   '/mobile-background/couple (2).jpg',
   '/mobile-background/couple (3).jpg',
   '/mobile-background/couple (4).jpg',
   '/mobile-background/couple (5).jpg',
-].map((src) => getCloudinaryUrl(src, { width: 768, quality: "auto" }))
+]
 
 const SHOW_BUTTERFLIES = false
 
@@ -71,7 +71,7 @@ export function Hero() {
     setCurrentImageIndex(0)
     
     // Load first image with priority to show it immediately
-    const firstImg = new Image()
+    const firstImg = new window.Image()
     firstImg.src = backgroundImages[0]
     firstImg.onload = () => {
       setImagesLoaded(true) // Show first image immediately
@@ -81,7 +81,7 @@ export function Hero() {
     setTimeout(() => {
       if (typeof navigator !== 'undefined' && (navigator as any).connection?.saveData) return
       backgroundImages.slice(1, 3).forEach((src) => {
-        const img = new Image()
+        const img = new window.Image()
         img.decoding = 'async'
         img.loading = 'lazy' as any
         img.src = src
@@ -117,20 +117,24 @@ export function Hero() {
   return (
     <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden bg-motif-deep">
       <div className="absolute inset-0 w-full h-full">
-        {imagesLoaded && backgroundImages.map((image, index) => (
+        {imagesLoaded && backgroundImages.map((src, index) => (
           <div
-            key={image}
+            key={src}
             className={`absolute inset-0 transition-opacity duration-[1500ms] ease-in-out ${
               index === currentImageIndex ? "opacity-100" : "opacity-0"
             }`}
-            style={{
-              backgroundImage: `url('${image}')`,
-              backgroundSize: "cover",
-              backgroundPosition: "center",
-              backgroundRepeat: "no-repeat",
-              willChange: "opacity",
-            }}
-          />
+            style={{ willChange: "opacity" }}
+          >
+            <Image
+              src={src}
+              alt="Gallery Image"
+              fill
+              quality={90}
+              priority={index === 0}
+              className="object-cover"
+              sizes="100vw"
+            />
+          </div>
         ))}
         <div className="absolute inset-0 bg-gradient-to-t from-motif-deep/90 via-motif-deep/70 to-transparent z-0" />
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-motif-deep/75 z-0" />
